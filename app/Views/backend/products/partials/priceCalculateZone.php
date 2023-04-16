@@ -95,8 +95,8 @@
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
-				<label for="tax_percentage"><i class="fa-solid fa-circle-arrow-down"></i> Tax Percentage</label>
-				<select name="tax_percentage" id="tax_percentage" class="form-control">
+				<label for="tax_percentage2"><i class="fa-solid fa-circle-arrow-down"></i> Tax Percentage</label>
+				<select name="tax_percentage" id="tax_percentage2" class="form-control">
 					<option value="">-- Select a Tax Percentage --</option>
 					
 					<?php if(is_null($id)): ?>
@@ -118,9 +118,9 @@
 				<label for="gross_price"><i class="fa-solid fa-circle-arrow-down"></i> Gross Price</label>
 					
 				<?php if(is_null($id)): ?>
-					<input type="text" name="gross_price" class="form-control" value="0.00" id="gross_price">
+					<input type="text" name="gross_price" class="form-control" placeholder="0.00" id="gross_price">
 				<?php else: ?>
-					<input type="text" name="gross_price" class="form-control" value="<?= number_format(esc($product->gross_price), 2, ".", ""); ?>" id="gross_price">
+					<input type="text" name="gross_price" class="form-control" placeholder="0.00" value="<?= number_format(esc($product->gross_price), 2, ".", ""); ?>" id="gross_price">
 				<?php endif; ?>
 
 				<div class="error_gross_price text-danger font-weight-bold pt-1"></div>
@@ -154,18 +154,18 @@
 		<script>
 			$(document).on("keyup", "#gross_price", function(e){
 				var gross_price = $(this).val();
-				var tax_percentage = $("#tax_percentage").val();
-				var net_price = ((Number(100) * Number(gross_price)) / (Number(100) + Number(tax_percentage)));
+				var tax_percentage2 = $("#tax_percentage2").val();
+				var net_price = ((Number(100) * Number(gross_price)) / (Number(100) + Number(tax_percentage2)));
 				var tax_amount = Number(gross_price) - Number(net_price);
 				$("#tax_amount").val(tax_amount.toFixed(2));
 				(net_price == undefined || net_price == "") ? $("#net_price").val("") : $("#net_price").val(net_price.toFixed(2));
 			});
 
-			$(document).on("change", "#tax_percentage", function(e){
-				var tax_percentage = $(this).val();
+			$(document).on("change", "#tax_percentage2", function(e){
+				var tax_percentage2 = $(this).val();
 				var gross_price = $("#gross_price").val();
-				var net_price = ((Number(100) * Number(gross_price)) / (Number(100) + Number(tax_percentage)));
-				(tax_percentage == undefined || tax_percentage == "") ? $(".showTax").text("") : $(".showTax").text("(" + tax_percentage + "%)");
+				var net_price = ((Number(100) * Number(gross_price)) / (Number(100) + Number(tax_percentage2)));
+				(tax_percentage2 == undefined || tax_percentage2 == "") ? $(".showTax").text("") : $(".showTax").text("(" + tax_percentage2 + "%)");
 				var tax_amount = Number(gross_price) - Number(net_price);
 				$("#tax_amount").val(tax_amount.toFixed(2));
 				(net_price == undefined || net_price == "") ? $("#net_price").val("") : $("#net_price").val(net_price.toFixed(2));
